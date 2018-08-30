@@ -128,8 +128,8 @@ class Draw():
         im = tf.reshape(tf.cast(tf.range(self.img_size), tf.float32), [1, 1, -1])
         # list of gaussian curves for x and y
         sigma2 = tf.reshape(sigma2, [-1, 1, 1])
-        Fx = tf.exp(-tf.square((im - mu_x) / (2*sigma2)))
-        Fy = tf.exp(-tf.square((im - mu_x) / (2*sigma2)))
+        Fx = tf.exp(-tf.square(im - mu_x) / (2*sigma2))
+        Fy = tf.exp(-tf.square(im - mu_y) / (2*sigma2))
         # normalize so area-under-curve = 1
         Fx = Fx / tf.maximum(tf.reduce_sum(Fx,2,keep_dims=True),1e-8)
         Fy = Fy / tf.maximum(tf.reduce_sum(Fy,2,keep_dims=True),1e-8)
